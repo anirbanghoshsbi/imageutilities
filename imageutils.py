@@ -45,7 +45,7 @@ def predict_image(imagepath, labels,label_list,labelDict,model,size=224):
     cv2.putText(output, imlabels, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,
         0.7, (0, 255, 0), 2)
     # show the output image
-    cv2.imwrite(os.cwd()+'/output.png',output)
+    cv2.imwrite(os.getcwd()+'/output.png',output)
     return None
 
 
