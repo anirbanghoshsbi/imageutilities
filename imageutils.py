@@ -35,9 +35,9 @@ def predict_image(imagepath, labels,label_list,labelDict,model,size=224):
     res=res.tolist()
     value = None
     for key in label_list:
-    if key in labelDict:
-        value = labelDict[key]
-        break
+        if key in labelDict:
+            value = labelDict[key]
+            break
     label = str(value)    
     imlabels = "{}: {:.2f}%".format(label, res[0])
     # draw the label on the image
