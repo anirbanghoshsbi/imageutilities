@@ -7,6 +7,11 @@ import numpy as np
 import cv2
 import imutils
 
+
+def get_img_path(pathtoImages):
+    imagePaths = list(paths.list_images(pathtoImages))
+    return imagePaths
+
 def get_all_subdirs(base_dir):
 
     base_dir = base_dir
@@ -20,8 +25,8 @@ def rename_image_file(subdirs):
           os.rename(filelocation + filename, filelocation + str(i) + ".jpg")
     return "Done"    
 
-def predict_image(imagepath, labels,label_list,labelDict,model,size=224):
-    
+def predict_image(imagepath,label_list,labelDict,model,size=224):
+     
     image = cv2.imread(imagepath)
     orig = image.copy()
     # pre-process the image for classification
@@ -33,11 +38,7 @@ def predict_image(imagepath, labels,label_list,labelDict,model,size=224):
     val=np.argmax(model.predict(image), axis=1).tolist()
     res=result[val]*100
     res=res.tolist()
-    value = None
-    for key in label_list:
-        if key in labelDict:
-            value = labelDict[key]
-            break
+    value = lDict.get(val[0])
     label = str(value)    
     imlabels = "{}: {:.2f}%".format(label, res[0])
     # draw the label on the image
